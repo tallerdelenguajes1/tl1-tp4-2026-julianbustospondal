@@ -41,4 +41,19 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+### Visual Studio Code ###
+# Ignorar toda la carpeta de configuración local de VS Code
+.vscode/
+
+# Ignorar el historial local de VS Code
+.history/
+
+
+### Visual Studio ###
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
 # End of https://www.toptal.com/developers/gitignore/api/executable,windows
