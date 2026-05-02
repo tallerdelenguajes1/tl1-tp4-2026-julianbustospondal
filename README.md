@@ -36,4 +36,4 @@ El proyecto cumple con los siguientes requerimientos solicitados:
 - [x] **Interfaz de Carga de Tareas:** Solicita la descripción y duración de tareas pendientes. El `TareaID` es generado automáticamente por el sistema de manera autoincremental desde el 1000. Al finalizar cada tarea, se consulta al usuario si desea ingresar una nueva o finalizar.
 - [x] **Transferencia de Estado:** Interfaz que permite elegir, mediante el ID, qué tareas de la lista de pendientes deben ser movidas a la lista de tareas realizadas.
 - [x] **Listado General:** Funcionalidad para imprimir por pantalla el reporte final mostrando todas las tareas pendientes y realizadas.
-- [ ] **Búsqueda Avanzada:** Funcionalidad que permite consultar tareas por ID o palabra clave, mostrándolas por pantalla e indicando en qué lista se encuentran actualmente (Pendiente o Realizada).
+- [x] **Búsqueda Avanzada:** Funcionalidad que permite consultar tareas por ID o palabra clave, mostrándolas por pantalla e indicando en qué lista se encuentran actualmente (Pendiente o Realizada).

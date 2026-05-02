@@ -19,6 +19,8 @@ Tnodo *CrearListaVacia();
 Tnodo *CrearNodo(Tarea dato);
 void InsertarNodo(Tnodo **Start, Tnodo *Nodo);
 Tnodo *QuitarNodo(Tnodo **Start, int idBuscado);
+Tnodo *BuscarNodo(Tnodo *Start, int IdBuscado);
+Tnodo *BuscarNodoPalabra(Tnodo *Start, char *busqueda);
 void MostrarLista(Tnodo *Start);
 void LiberarLista(Tnodo **Start);
 int main()
@@ -26,6 +28,7 @@ int main()
     int continuar = 1;
     int duracion;
     int id = 1000;
+    int eleccionBusqueda;
     Tnodo *ListaPendientes = CrearListaVacia();
     Tnodo *ListaRealizadas = CrearListaVacia();
     char descriptemp[100];
@@ -90,13 +93,64 @@ int main()
     MostrarLista(ListaPendientes);
     printf("\n REALIZADAS:\n");
     MostrarLista(ListaRealizadas);
+    int continuar1 = 0;
+    while (continuar1 == 0)
+    {
 
-    LiberarLista(&ListaPendientes);
+        printf("mostrar tarea. por ID:0 / por Nombre:1\n");
+        scanf("%d", &eleccionBusqueda);
+        if (eleccionBusqueda == 0)
+        {
+            int IdBusqueda;
+            printf("indtroduzca ID:\n");
+            scanf("%d", &IdBusqueda);
+            Tnodo *BusquedaId = BuscarNodo(ListaPendientes, IdBusqueda);
+            Tnodo *BusquedaId2 = BuscarNodo(ListaRealizadas, IdBusqueda);
+            if (BusquedaId != NULL)
+            {
+                printf("  [ID: %d] %s (Duracion: %d) Tarea Pendiente\n", BusquedaId->T.TareaID, BusquedaId->T.Descripcion, BusquedaId->T.Duracion);
+            }
+            else if (BusquedaId2 != NULL)
+            {
+                printf("  [ID: %d] %s (Duracion: %d) Tarea Realizada\n", BusquedaId2->T.TareaID, BusquedaId2->T.Descripcion, BusquedaId2->T.Duracion);
+            }
+            else
+            {
+                printf("No se encontro ningun ID\n");
+            }
+        }
+        else if (eleccionBusqueda == 1)
+        {
+            char PalabraClave[50];
+            printf("indtroduzca nombre:\n");
+            scanf(" %[^\n]", PalabraClave);
+            Tnodo *BusquedaNombre = BuscarNodoPalabra(ListaPendientes, PalabraClave);
+            Tnodo *BusquedaNombre2 = BuscarNodoPalabra(ListaRealizadas, PalabraClave);
+            if (BusquedaNombre != NULL)
+            {
+                printf("  [ID: %d] %s (Duracion: %d) Tarea Pendiente\n", BusquedaNombre->T.TareaID, BusquedaNombre->T.Descripcion, BusquedaNombre->T.Duracion);
+            }
+            else if (BusquedaNombre2 != NULL)
+            {
+                printf("  [ID: %d] %s (Duracion: %d) Tarea Realizada\n", BusquedaNombre2->T.TareaID, BusquedaNombre2->T.Descripcion, BusquedaNombre2->T.Duracion);
+            }
+            else
+            {
+                printf("No se encontro esa palabra\n");
+            }
+        }
+        else
+        {
+            printf("valor incorrecto\n");
+        }
+        printf("desea consultar de nuevo? si:0 no:1\n");
+        scanf("%d", &continuar1);
+    }
     LiberarLista(&ListaRealizadas);
-
+    LiberarLista(&ListaPendientes);
     return 0;
 }
-
+// -----------------------------------------------Funciones----------------------------------------------------------------------------------------------------
 Tnodo *CrearListaVacia()
 {
     return NULL;
@@ -169,4 +223,30 @@ void LiberarLista(Tnodo **Start)
         Actual = Siguiente;
     }
     *Start = NULL;
+}
+Tnodo *BuscarNodoPalabra(Tnodo *Start, char *busqueda)
+{
+    Tnodo *Aux = Start;
+    while (Aux != NULL)
+    {
+        if (strstr(Aux->T.Descripcion, busqueda) != NULL)
+        {
+            return Aux;
+        }
+        Aux = Aux->siguiente;
+    }
+    return NULL;
+}
+Tnodo *BuscarNodo(Tnodo *Start, int IdBuscado)
+{
+    Tnodo *Aux = Start;
+    while (Aux != NULL)
+    {
+        if (Aux->T.TareaID == IdBuscado)
+        {
+            return Aux;
+        }
+        Aux = Aux->siguiente;
+    }
+    return NULL;
 }
